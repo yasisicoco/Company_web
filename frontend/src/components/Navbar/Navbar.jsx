@@ -40,7 +40,11 @@ const Navbar = () => {
         <div className="hidden lg:flex flex-1 justify-center">
           <ul className="flex gap-8 text-lg ">
             {menuItems.map((item) => (
-              <MenuItem key={item.path} {...item} />
+              <MenuItem
+                key={item.path}
+                {...item}
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              />
             ))}
           </ul>
         </div>
@@ -83,7 +87,7 @@ const Navbar = () => {
                 {...item}
                 onClick={() => {
                   setIsOpen(false);
-                  window.scrollTo({ top: 0, begavior: "smooth" });
+                  window.scrollTo({ top: 0, behavior: "smooth" });
                 }}
               />
             ))}
