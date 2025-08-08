@@ -5,7 +5,6 @@ import { FaInstagram, FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
   const scrollToTop = () => {
-    alert("gg");
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -47,7 +46,7 @@ const Footer = () => {
               <li>
                 <Link
                   onClick={scrollToTop}
-                  to="/leadership"
+                  to="/team-member"
                   className="hover:text-white transition-colors"
                 >
                   스터디원 소개
@@ -65,7 +64,7 @@ const Footer = () => {
               <li>
                 <Link
                   onClick={scrollToTop}
-                  to="/our-services"
+                  to="/history"
                   className="hover:text-white transition-colors"
                 >
                   스터디 이력

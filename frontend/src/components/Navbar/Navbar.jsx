@@ -5,9 +5,9 @@ import { HiMenu, HiX } from "react-icons/hi";
 const menuItems = [
   { path: "/", label: "홈" },
   { path: "/about", label: "스터디 정보" },
-  { path: "/leadership", label: "스터디원 소개" },
+  { path: "/team-member", label: "스터디원 소개" },
   { path: "/board", label: "자유 게시판" },
-  { path: "/our-services", label: "스터디 이력" },
+  { path: "/history", label: "스터디 이력" },
   { path: "/contact", label: "문의하기" },
 ];
 
@@ -31,10 +31,10 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fiexd top-0 left-0 w-full bg-white text-black p-4 shadow-lg z-50">
+    <nav className="fixed top-0 left-0 w-full bg-white text-black p-4 shadow-lg z-50">
       <div className="container mx-auto flex justify-between items-center">
         <h1 className="text-xl lg:text-2xl font-bold lg:ml-12 lg:mr-8">
-          <a href="/">JW Company</a>
+          <a href="/">IT Study</a>
         </h1>
 
         <div className="hidden lg:flex flex-1 justify-center">
