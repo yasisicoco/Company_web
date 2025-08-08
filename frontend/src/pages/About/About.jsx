@@ -64,7 +64,7 @@ const About = () => {
       <div className="mb-24 max-w-4xl mx-auto text-center">
         <h2 className="text-4xl font-bold mb-8 text-slate-800">회사 비전</h2>
         <p className="text-2xl leading-relaxed text-gray-600 font-light">
-          "2030년까지 글로벌 시장을 선도하는 기술 혁신 기업으로 도약하여, <bt />
+          "2030년까지 글로벌 시장을 선도하는 기술 혁신 기업으로 도약하여, <br />
           더 나은 세상을 만드는데 기여하겠습니다."
         </p>
       </div>
