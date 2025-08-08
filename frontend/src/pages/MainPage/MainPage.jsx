@@ -1,7 +1,7 @@
 import React from "react";
 import Hero from "./Hero";
 import Forum from "./forum";
-import Contact from "../Contact/Contact";
+import Contact from "./Contact";
 
 const MainPage = () => {
   return (
