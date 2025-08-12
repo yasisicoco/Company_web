@@ -11,6 +11,8 @@ import TeamMember from "./pages/TeamMember/TeamMember";
 import History from "./pages/History/History";
 import Contact from "./pages/Contact/Contact";
 
+import AdminLogin from "./pages/Admin/AdminLogin";
+
 function Layout() {
   return (
     <>
@@ -53,6 +55,10 @@ const router = createBrowserRouter([
         element: <Contact />,
       },
     ],
+  },
+  {
+    path: "/admin",
+    element: <AdminLogin />,
   },
 ]);
 
