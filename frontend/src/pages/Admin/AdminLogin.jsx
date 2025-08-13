@@ -32,7 +32,7 @@ const AdminLogin = () => {
       );
 
       if (response.data.user) {
-        navigate("/admin/post");
+        navigate("/admin/posts");
       }
     } catch (error) {
       const errorMessage =

@@ -9,6 +9,7 @@ import axios from "axios";
 
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
+import AdminNavbar from "./components/AdminNavbar/AdminNavbar";
 
 import MainPage from "./pages/MainPage/MainPage";
 import About from "./pages/About/About";
@@ -18,6 +19,10 @@ import History from "./pages/History/History";
 import Contact from "./pages/Contact/Contact";
 
 import AdminLogin from "./pages/Admin/AdminLogin";
+import AdminPosts from "./pages/Admin/AdminPosts";
+import AdminCreatePost from "./pages/Admin/AdminCreatePost";
+import AdminEditPost from "./pages/Admin/AdminEditPost";
+import AdminContacts from "./pages/Admin/AdminContacts";
 
 function AuthRedirectRoute() {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
@@ -46,12 +51,55 @@ function AuthRedirectRoute() {
   return isAuthenticated ? <Navigate to="/admin/posts" replace /> : <Outlet />;
 }
 
+function ProtectedRoute() {
+  const [isAuthenticated, setIsAuthenticated] = useState(null);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const verifyToken = async () => {
+      try {
+        const response = await axios.post(
+          "http://localhost:3000/api/auth/verify-token",
+          {},
+          { withCredentials: true }
+        );
+        setIsAuthenticated(response.data.isValid);
+        setUser(response.data.user);
+      } catch (error) {
+        console.log("토큰 인증 실패: ", error);
+        setIsAuthenticated(false);
+        setUser(null);
+      }
+    };
+    verifyToken();
+  }, []);
+
+  if (isAuthenticated === null) {
+    return null;
+  }
+
+  return isAuthenticated ? (
+    <Outlet context={{ user }} />
+  ) : (
+    <Navigate to="/admin" replace />
+  );
+}
+
 function Layout() {
   return (
     <>
       <Navbar />
       <Outlet />
       <Footer />
+    </>
+  );
+}
+
+function AdminLayout() {
+  return (
+    <>
+      <AdminNavbar />
+      <Outlet />
     </>
   );
 }
@@ -117,6 +165,33 @@ const router = createBrowserRouter([
     path: "/admin",
     element: <AuthRedirectRoute />,
     children: [{ index: true, element: <AdminLogin /> }],
+  },
+  {
+    path: "/admin",
+    element: <ProtectedRoute />,
+    children: [
+      {
+        element: <AdminLayout />,
+        children: [
+          {
+            path: "posts",
+            element: <AdminPosts />,
+          },
+          {
+            path: "create-post",
+            element: <AdminCreatePost />,
+          },
+          {
+            path: "create-post/:id",
+            element: <AdminEditPost />,
+          },
+          {
+            path: "contacts",
+            element: <AdminContacts />,
+          },
+        ],
+      },
+    ],
   },
 ]);
 
