@@ -1,4 +1,4 @@
-const { S3client, DeleteObjectCommand } = require("@aws-sdk/client-s3");
+const { S3Client, DeleteObjectCommand } = require("@aws-sdk/client-s3");
 const express = require("express");
 const router = express.Router();
 const Post = require("../models/Post");
@@ -30,7 +30,7 @@ const authenticateToken = (req, res, next) => {
   }
 };
 
-router.post("/", authenticateToken, async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const { title, content, fileUrl } = req.body;
 
