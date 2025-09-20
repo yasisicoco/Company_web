@@ -1,3 +1,4 @@
+import { Editor } from "@tinymce/tinymce-react";
 import axios from "axios";
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -10,6 +11,7 @@ const AdminEditPost = () => {
     content: "",
     files: [],
     fileList: [],
+    existingFiles: [],
   });
   const editorRef = useRef(null);
   const [uploadProgress, setUploadProgress] = useState({});
@@ -19,11 +21,14 @@ const AdminEditPost = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/post${id}`);
+        const response = await axios.get(
+          `http://localhost:3000/api/post/${id}`
+        );
 
         setFormData({
           title: response.data.title,
-          content: [],
+          content: response.data.content,
+          files: [],
           fileList: [],
           existingFiles: response.data.fileUrl || [],
         });
@@ -138,10 +143,17 @@ const AdminEditPost = () => {
     }));
   };
 
+  const handleExistingFileDelete = (fileUrl) => {
+    setFormData((prev) => ({
+      ...prev,
+      existingFiles: prev.existingFiles.filter((url) => url !== fileUrl),
+    }));
+  };
+
   const handleFileDelete = (fileId) => {
     setFormData((prev) => ({
       ...prev,
-      file: prev.files.filter(
+      files: prev.files.filter(
         (_, index) => prev.fileList[index]?.id !== fileId
       ),
       fileList: prev.fileList.filter((file) => file?.id !== fileId),
@@ -151,9 +163,9 @@ const AdminEditPost = () => {
   const formatFileSize = (bytes) => {
     if (bytes === 0) return "0Bytes";
     const k = 1024;
-    const size = ["Bytes", "KB", "MB", "GB"];
+    const sizes = ["Bytes", "KB", "MB", "GB"];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat(bytes / Math.pow(k, i).toFixed(2) + " " + size[i]);
+    return parseFloat(bytes / Math.pow(k, i).toFixed(2) + " " + sizes[i]);
   };
 
   return (
@@ -338,7 +350,7 @@ const AdminEditPost = () => {
               htmlFor="files"
               className="block text-lg sm:text-xl font-medium text-gray-700 mb-2"
             >
-              첨부파일
+              새 첨부파일 추가
             </label>
           </div>
           <input
@@ -351,7 +363,9 @@ const AdminEditPost = () => {
 
           {formData.fileList.length > 0 && (
             <div className="mt-4 space-y-2">
-              <p className="font-medium text-gray-700">첨부된 파일 목록:</p>
+              <p className="font-medium text-gray-700">
+                새로 추가된 파일 목록:
+              </p>
               <ul className="bg-gray-50 rounded-lg divide-y divide-gray-200">
                 {formData.fileList.map((file) => (
                   <li
@@ -411,7 +425,7 @@ const AdminEditPost = () => {
               type="submit"
               className="w-full sm:w-auto sm:px-6 py-2 sm:py-3 text-base sm:text-lg font-medium text-white bg-blue-600 border-2 border-transparent rounded-lg shadow-sm hover:bg-blue-700 focus:outline-none transition-all duration-300"
             >
-              저장
+              수정
             </button>
             <button
               type="button"
