@@ -14,6 +14,7 @@ import AdminNavbar from "./components/AdminNavbar/AdminNavbar";
 import MainPage from "./pages/MainPage/MainPage";
 import About from "./pages/About/About";
 import Board from "./pages/Board/Board";
+import SinglePost from "./pages/SinglePost/SinglePost";
 import TeamMember from "./pages/TeamMember/TeamMember";
 import History from "./pages/History/History";
 import Contact from "./pages/Contact/Contact";
@@ -150,6 +151,10 @@ const router = createBrowserRouter([
       {
         path: "/board",
         element: <Board />,
+      },
+      {
+        path: "/post/:id",
+        element: <SinglePost />,
       },
       {
         path: "/history",

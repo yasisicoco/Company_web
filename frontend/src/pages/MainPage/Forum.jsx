@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, Links } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Forum = () => {
   const [posts, setPosts] = useState([]);
@@ -26,7 +26,7 @@ const Forum = () => {
       <div className="container mx-auto px-4 py-28 lg:py-48 max-w-6xl">
         <div className="text-center mb-6">
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900">
-            업무 게시판
+            자유 게시판
           </h2>
         </div>
 
@@ -67,7 +67,7 @@ const Forum = () => {
                 key={post._id}
                 className="border-b border-gray-100 last:border-b-0 hover:bg-blue-50 transition-colors duration-300"
               >
-                <Link to={`/board/${post._id}`} className="block">
+                <Link to={`/post/${post._id}`} className="block">
                   <div className="p-6 flex items-center justify-between">
                     <div className="flex-1">
                       <div className="flex items-center gap-4 mb-2">
