@@ -11,7 +11,7 @@ const AdminNavbar = () => {
   const handleLogout = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/auth/logout",
+        `${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/auth/logout`,
         {},
         { withCredentials: true }
       );

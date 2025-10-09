@@ -32,7 +32,7 @@ function AuthRedirectRoute() {
     const verifyToken = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:3000/api/auth/verify-token",
+          `${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/auth/verify-token`,
           {},
           { withCredentials: true }
         );
@@ -60,7 +60,7 @@ function ProtectedRoute() {
     const verifyToken = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:3000/api/auth/verify-token",
+          `${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/auth/verify-token`,
           {},
           { withCredentials: true }
         );
@@ -109,7 +109,7 @@ function BlacklistCheck() {
   useEffect(() => {
     const checkIP = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/check-ip");
+        const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/check-ip`);
         const data = await response.json();
 
         if (!data.allowed) {

@@ -12,7 +12,7 @@ const AdminPosts = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/post");
+        const response = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/post`);
         setPosts(response.data);
       } catch (error) {
         console.log("게시글 가져오기 실패: ", error);
@@ -36,7 +36,7 @@ const AdminPosts = () => {
 
     if (result.isConfirmed) {
       try {
-        await axios.delete(`http://localhost:3000/api/post/${id}`, {
+        await axios.delete(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/post/${id}`, {
           withCredentials: true,
         });
         setPosts(posts.filter((post) => post._id !== id));
